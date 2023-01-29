@@ -2,8 +2,10 @@ import React, {memo} from 'react';
 import {axiosInstance} from "../../config";
 import {useQuery} from "react-query";
 import {useParams} from "react-router-dom";
-import ResponsiveAppBar from "../../components/drawer/drawer";
 import {Typography} from "@mui/material";
+import ResponsiveAppBar from "../../components/header/header";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 
 function Testing() {
     const params = useParams()
@@ -41,9 +43,51 @@ function Testing() {
 
     if (status === 'success') {
         return (
-                <ResponsiveAppBar>
-                    <Typography variant={'h4'} sx={{textAlign:'center'}}>{params.subject}</Typography>
-                </ResponsiveAppBar>
+            <ResponsiveAppBar>
+                <Typography variant={'h4'} sx={{textAlign: 'center', marginY: 3}}>{params.subject}</Typography>
+                <Box sx={{
+                    border: '1px solid #f3f3f3',
+                    display:'flex',
+                    flexDirection:'column',
+                    backgroundColor: 'rgba(86,86,86,0.15)',
+                    borderRadius: 2,
+                    padding: 2,
+                    gap:3
+                }}>
+                    {
+                        data.data.map((item, index) => (
+                            <Box key={item.id}
+                                 sx={{border: '1px solid black', borderRadius: 2, padding: 1}}>
+                                <Typography variant={'p'} sx={{
+                                    textAlign: 'center',
+                                    fontSize: '24px',
+                                }}>{index + 1}.{item.question}</Typography>
+                                <Box>
+                                    {
+                                        item.variants.map((variant) => (
+                                            <Box sx={{
+                                                display: 'flex',
+                                                justifyContent: 'start',
+                                                padding: 1,
+                                                borderRadius: 1,
+                                                alignItems: 'center',
+                                                transition: 'all .3s',
+                                                cursor: 'pointer',
+                                                "&:hover": {
+                                                    backgroundColor: 'rgba(86,86,86,0.23)'
+                                                }
+                                            }}>
+                                                <Typography sx={{textAlign: 'center'}}>{variant.text}</Typography>
+                                            </Box>
+                                        ))
+                                    }
+                                </Box>
+                            </Box>
+                        ))
+                    }
+
+                </Box>
+            </ResponsiveAppBar>
         );
     }
 }
