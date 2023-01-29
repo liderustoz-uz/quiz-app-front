@@ -85,7 +85,7 @@ const SignUp = () => {
                                 password: data.get('password'),
                             })
                             console.log(res)
-                            navigate("/home")
+                            navigate("/subjects")
                             localStorage.setItem('user', res.data.token)
                         } catch (e) {
                             console.log(e);

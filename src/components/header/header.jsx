@@ -6,20 +6,19 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import {memo, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
-const pages = ['Products', 'Pricing', 'About'];
-const settings = ['Chiqish'];
 
 function ResponsiveAppBar({children}) {
+    const pages = ['Mahsulotlar', 'Test haqida'];
+    const settings = (localStorage.getItem('token') === null && localStorage.getItem('role') === null) ? ['Kirish', "Ro'yxatdan o'tish"] : ['Chiqish'];
+
     const navigate = useNavigate()
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -41,7 +40,16 @@ function ResponsiveAppBar({children}) {
 
     const logOut = () => {
         localStorage.removeItem('user')
+        localStorage.removeItem('role')
+        localStorage.removeItem('token')
         navigate('/login')
+    }
+    const logIn = () => {
+        navigate('/login')
+    }
+
+    const signUp = () => {
+        navigate('/signup')
     }
 
     return (
@@ -54,11 +62,11 @@ function ResponsiveAppBar({children}) {
                             variant="h6"
                             noWrap
                             component="a"
-                            href="/home"
+                            href="/"
                             sx={{
                                 mr: 2,
                                 display: {xs: 'none', md: 'flex'},
-                                fontFamily: 'monospace',
+                                fontFamily: 'Nunito,sans-serif',
                                 fontWeight: 700,
                                 letterSpacing: '.3rem',
                                 color: 'inherit',
@@ -94,17 +102,17 @@ function ResponsiveAppBar({children}) {
                                 open={Boolean(anchorElNav)}
                                 onClose={handleCloseNavMenu}
                                 sx={{
-                                    display: {xs: 'block', md: 'none'},
+                                    display: {xs: 'block', md: 'none'},fontFamily: 'Nunito,sans-serif',
                                 }}
                             >
                                 {pages.map((page) => (
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
+                                        <Typography textAlign="center" sx={{fontFamily: 'Nunito,sans-serif',}}>{page}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
                         </Box>
-                        <AdbIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
+                        <ImportContactsIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
                         <Typography
                             variant="h5"
                             noWrap
@@ -114,21 +122,21 @@ function ResponsiveAppBar({children}) {
                                 mr: 2,
                                 display: {xs: 'flex', md: 'none'},
                                 flexGrow: 1,
-                                fontFamily: 'monospace',
+                                fontFamily: 'Nunito,sans-serif',
                                 fontWeight: 700,
                                 letterSpacing: '.3rem',
                                 color: 'inherit',
                                 textDecoration: 'none',
                             }}
                         >
-                            LOGO
+                            Test
                         </Typography>
                         <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                             {pages.map((page) => (
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}
-                                    sx={{my: 2, color: 'black', display: 'block'}}
+                                    sx={{my: 2, color: 'black', display: 'block',fontFamily: 'Nunito,sans-serif',}}
                                 >
                                     {page}
                                 </Button>
@@ -160,8 +168,8 @@ function ResponsiveAppBar({children}) {
                             >
                                 {settings.map((setting) => (
                                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center"
-                                                    onClick={setting === 'Chiqish' && logOut}>{setting}</Typography>
+                                        <Typography textAlign="center" sx={{fontFamily: 'Nunito,sans-serif',}}
+                                                    onClick={setting === 'Chiqish' ? logOut : setting === 'Kirish' ? logIn : signUp}>{setting}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -169,7 +177,7 @@ function ResponsiveAppBar({children}) {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Box sx={{padding: '12px'}}>
+            <Box sx={{padding: '12px', paddingTop: '24px'}}>
                 {children}
             </Box>
         </>

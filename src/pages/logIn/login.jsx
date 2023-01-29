@@ -29,7 +29,7 @@ const Login = () => {
                 password: data.get('password'),
             })
             console.log(res)
-            navigate("/home")
+            navigate("/subjects")
             signInSuccess(res.data.token)
             localStorage.setItem('user',res.data.token)
             localStorage.setItem('role',res.data.user.role)
