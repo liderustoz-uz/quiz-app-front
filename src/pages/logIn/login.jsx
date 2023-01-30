@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
-import {memo, useState} from 'react';
+import {memo, useEffect, useState} from 'react';
 import {axiosInstance} from "../../config";
 import {signInSuccess} from "../../redux/actions/actions";
 
@@ -19,6 +19,8 @@ const theme = createTheme();
 const Login = () => {
     const navigate = useNavigate()
     const [error, setError] = useState(false)
+
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -31,8 +33,8 @@ const Login = () => {
             console.log(res)
             navigate("/subjects")
             signInSuccess(res.data.token)
-            localStorage.setItem('user',res.data.token)
-            localStorage.setItem('role',res.data.user.role)
+            localStorage.setItem('user', res.data.token)
+            localStorage.setItem('role', res.data.user.role)
         } catch (e) {
             console.log(e);
             // setError(true);

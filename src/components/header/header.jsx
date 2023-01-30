@@ -16,9 +16,10 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 function ResponsiveAppBar({children}) {
-    const pages = ['Mahsulotlar', 'Test haqida'];
-    const settings = (localStorage.getItem('token') === null && localStorage.getItem('role') === null) ? ['Kirish', "Ro'yxatdan o'tish"] : ['Chiqish'];
-
+    const pages = ['Mahsulotlar', 'TestUz haqida'];
+    const settings = ['Chiqish'];
+    console.log((localStorage.getItem('role')))
+    console.log((localStorage.getItem('token')))
     const navigate = useNavigate()
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -42,7 +43,7 @@ function ResponsiveAppBar({children}) {
         localStorage.removeItem('user')
         localStorage.removeItem('role')
         localStorage.removeItem('token')
-        navigate('/login')
+        navigate('/')
     }
     const logIn = () => {
         navigate('/login')
@@ -102,12 +103,13 @@ function ResponsiveAppBar({children}) {
                                 open={Boolean(anchorElNav)}
                                 onClose={handleCloseNavMenu}
                                 sx={{
-                                    display: {xs: 'block', md: 'none'},fontFamily: 'Nunito,sans-serif',
+                                    display: {xs: 'block', md: 'none'}, fontFamily: 'Nunito,sans-serif',
                                 }}
                             >
                                 {pages.map((page) => (
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center" sx={{fontFamily: 'Nunito,sans-serif',}}>{page}</Typography>
+                                        <Typography textAlign="center"
+                                                    sx={{fontFamily: 'Nunito,sans-serif',}}>{page}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -136,14 +138,14 @@ function ResponsiveAppBar({children}) {
                                 <Button
                                     key={page}
                                     onClick={handleCloseNavMenu}
-                                    sx={{my: 2, color: 'black', display: 'block',fontFamily: 'Nunito,sans-serif',}}
+                                    sx={{my: 2, color: 'black', display: 'block', fontFamily: 'Nunito,sans-serif',}}
                                 >
                                     {page}
                                 </Button>
                             ))}
                         </Box>
 
-                        <Box sx={{flexGrow: 0}}>
+                        {(localStorage.getItem('role')&&localStorage.getItem('user')) ? <Box sx={{flexGrow: 0}}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                                     {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>*/}
@@ -169,11 +171,18 @@ function ResponsiveAppBar({children}) {
                                 {settings.map((setting) => (
                                     <MenuItem key={setting} onClick={handleCloseUserMenu}>
                                         <Typography textAlign="center" sx={{fontFamily: 'Nunito,sans-serif',}}
-                                                    onClick={setting === 'Chiqish' ? logOut : setting === 'Kirish' ? logIn : signUp}>{setting}</Typography>
+                                                    onClick={logOut}>{setting}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
+                        </Box> : <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+                            <Button variant={'outlined'} color={'inherit'} onClick={logIn}
+                                    sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Kirish</Button>
+                            <Button variant={'outlined'} color={'inherit'} onClick={signUp}
+                                    sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Ro'yxatdan
+                                o'tish</Button>
                         </Box>
+                        }
                     </Toolbar>
                 </Container>
             </AppBar>

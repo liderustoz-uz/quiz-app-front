@@ -10,7 +10,6 @@ import CreateSubjectModal from "../../components/createSubjectModal/createSubjec
 import DeleteSubjectModal from "../../components/deleteSubjectModal/deleteSubjectModal";
 import EditSubjectModal from "../../components/editSubjectModal/editSubjectModal";
 import Loading from "../../components/loading/loading";
-
 function Subjects() {
     const [openCreateSubjectModal, setOpenCreateSubjectModal] = useState(false)
     const [openDeleteSubjectModal, setOpenDeleteSubjectModal] = useState({open: false, id: null})

@@ -10,12 +10,17 @@ import Box from "@mui/material/Box";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function ActionAreaCard({subject,handleOpenDeleteSubjectModal,handleOpenEditSubjectModal}) {
+function ActionAreaCard({subject, handleOpenDeleteSubjectModal, handleOpenEditSubjectModal}) {
     console.log(subject)
     const navigate = useNavigate()
     return (
-        <Card sx={{borderRadius: 1.5, '&:hover': {transform: 'scale(1.025)'}, transition: 'all .3s',backgroundColor:'#f2f2f2'}}
-              onClick={localStorage.getItem('role') === 'ROLE_USER' ?() => navigate(`/test/${subject.name}/${subject.id}`):null}>
+        <Card sx={{
+            borderRadius: 1.5,
+            '&:hover': {transform: 'scale(1.025)'},
+            transition: 'all .3s',
+            backgroundColor: '#f2f2f2'
+        }}
+              onClick={localStorage.getItem('role') === 'ROLE_USER' ? () => navigate(`/test/${subject.name}/${subject.id}`) : null}>
             <CardActionArea>
                 {/*<CardMedia*/}
                 {/*    component="img"*/}
@@ -24,15 +29,18 @@ function ActionAreaCard({subject,handleOpenDeleteSubjectModal,handleOpenEditSubj
                 {/*    alt="green iguana"*/}
                 {/*/>*/}
                 <CardContent>
-                    <Typography gutterBottom variant="h5" component="div" sx={{textAlign: 'center'}} onClick={localStorage.getItem('role') !== 'ROLE_USER' ?() => navigate(`/test/${subject.name}/${subject.id}`):null}>
+                    <Typography gutterBottom variant="h5" component="div" sx={{textAlign: 'center'}}
+                                onClick={localStorage.getItem('role') !== 'ROLE_USER' ? () => navigate(`/test/${subject.name}/${subject.id}`) : null}>
                         {subject.name}
                     </Typography>
                     {
-                        localStorage.getItem('role') !== 'ROLE_USER' ?
-                            <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
-                                <Button onClick={()=>handleOpenEditSubjectModal(subject.id,subject.name)} variant={'outlined'} color={'warning'}><EditIcon/></Button>
-                                <Button onClick={()=>handleOpenDeleteSubjectModal(subject.id)} variant={'outlined'} color={'error'}><DeleteIcon/></Button>
-                            </Box> : ''
+                        localStorage.getItem('role') === 'ROLE_ADMIN' &&
+                        <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                            <Button onClick={() => handleOpenEditSubjectModal(subject.id, subject.name)}
+                                    color={'warning'}><EditIcon/></Button>
+                            <Button onClick={() => handleOpenDeleteSubjectModal(subject.id)}
+                                    color={'error'}><DeleteIcon/></Button>
+                        </Box>
                     }
                 </CardContent>
             </CardActionArea>
