@@ -73,7 +73,7 @@ function ResponsiveAppBar({children}) {
                                 textDecoration: 'none',
                             }}
                         >
-                            Test
+                            TestUz
                         </Typography>
 
                         <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}, color: 'black'}}>
@@ -129,7 +129,7 @@ function ResponsiveAppBar({children}) {
                                 textDecoration: 'none',
                             }}
                         >
-                            Test
+                            TestUz
                         </Typography>
                         <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                             {pages.map((page) => (

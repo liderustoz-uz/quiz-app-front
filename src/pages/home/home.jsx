@@ -6,6 +6,8 @@ import ResponsiveAppBar from "../../components/header/header";
 import Box from "@mui/material/Box";
 import Loading from "../../components/loading/loading";
 import Typography from "@mui/material/Typography";
+import imageHome from '../../assets/121-1213245_how-to-set-use-man-reading-books-svg.png'
+import CardMedia from "@mui/material/CardMedia";
 
 function Home() {
     const queryClient = useQueryClient()
@@ -48,16 +50,27 @@ function Home() {
     if (status === 'success') {
         return (
             <ResponsiveAppBar>
-                <Grid container spacing={3} sx={{sm: {justifyContent: 'center'}}}>
-                    <Grid item lg={6} md={12} sm={12} xs={12}>
-                        <Typography variant={'span'} sx={{fontSize:'40px',fontWeight:'bold'}}>
-                            O‘z bilimingizni sinang!
-                        </Typography>
+                <Box sx={{maxWidth:'1440px',mx:'auto'}}>
+                    <Grid container sx={{sm: {justifyContent: 'center'},minHeight:'86vh', alignItems:'center',justifyContent:'center',margin:'0'}}>
+                        <Grid item lg={6} md={12} sm={12} xs={12} sx={{display:'block',paddingLeft:'60px'}}>
+                               <Typography variant={'span'} sx={{display:'block',fontSize:'40px',fontWeight:'bold'}}>
+                                   O‘z bilimingizni sinang!
+                               </Typography>
+                               <Typography variant={'span'}>
+                                   TestUz – bu o‘qituvchilarni tayyorgarlik ko‘rishi uchun sinov platformasidir.
+                               </Typography>
+                        </Grid>
+                        <Grid item lg={6} md={12} sm={12} xs={12}>
+                            <CardMedia
+                                component="img"
+                                // height="194"
+                                width={"600"}
+                                image={imageHome}
+                                alt="Paella dish"
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item lg={6} md={12} sm={12} xs={12}>
-
-                    </Grid>
-                </Grid>
+                </Box>
             </ResponsiveAppBar>
         );
     }

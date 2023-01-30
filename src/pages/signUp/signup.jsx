@@ -73,7 +73,7 @@ const SignUp = () => {
             setFirstNameError(false)
             if (data.get('lastName').trim().length > 0) {
                 setLastNameError(false)
-                if (data.get('userName').trim().length > 4 && data.get('userName').trim().length < 10) {
+                if (data.get('userName').trim().length >= 4 && data.get('userName').trim().length <= 10) {
                     setUserNameError(false)
                     if (password(data.get('password')) && data.get('password').length > 8) {
                         setPasswordError(false);
