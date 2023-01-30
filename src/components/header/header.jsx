@@ -16,7 +16,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 function ResponsiveAppBar({children}) {
-    const pages = ['Mahsulotlar', 'Test haqida'];
+    const pages = ['Mahsulotlar', 'TestUz haqida'];
     const settings = (localStorage.getItem('token') === null && localStorage.getItem('role') === null) ? ['Kirish', "Ro'yxatdan o'tish"] : ['Chiqish'];
 
     const navigate = useNavigate()

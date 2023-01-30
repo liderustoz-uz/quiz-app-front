@@ -47,6 +47,7 @@ function Home() {
             </>
         )
     }
+
     if (status === 'success') {
         return (
             <ResponsiveAppBar>
