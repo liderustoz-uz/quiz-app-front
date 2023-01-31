@@ -10,6 +10,8 @@ import CreateSubjectModal from "../../components/createSubjectModal/createSubjec
 import DeleteSubjectModal from "../../components/deleteSubjectModal/deleteSubjectModal";
 import EditSubjectModal from "../../components/editSubjectModal/editSubjectModal";
 import Loading from "../../components/loading/loading";
+import Footer from "../../components/footer/footer";
+
 function Subjects() {
     const [openCreateSubjectModal, setOpenCreateSubjectModal] = useState(false)
     const [openDeleteSubjectModal, setOpenDeleteSubjectModal] = useState({open: false, id: null})
@@ -94,7 +96,13 @@ function Subjects() {
 
     if (status === 'loading') {
         return (
-            <Box sx={{minHeight:'100vh',width:'100%',display:'flex',alignItems:'center',justifyContent:'center'}}>
+            <Box sx={{
+                minHeight: '100vh',
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+            }}>
                 <Loading/>
             </Box>
         )
@@ -109,46 +117,50 @@ function Subjects() {
     }
     if (status === 'success') {
         return (
-            <ResponsiveAppBar>
-                <Grid container spacing={3} sx={{sm: {justifyContent: 'center'}}}>
-                    {
-                        data?.data?.map((item) => (
-                            <Grid key={item.id} item lg={3} md={4} sm={6} xs={12}>
-                                <ActionAreaCard subject={item}
-                                                handleOpenDeleteSubjectModal={handleOpenDeleteSubjectModal}
-                                                handleOpenEditSubjectModal={handleOpenEditSubjectModal}/>
-                            </Grid>
-                        ))
-                    }
-                    {
-                        localStorage.getItem('role') !== 'ROLE_USER' ? <Grid item lg={3} md={4} sm={6} xs={12}>
-                            <Box onClick={handleOpenCreateSubjectModal}
-                                 sx={{
-                                     borderRadius: 1.5,
-                                     '&:hover': {transform: 'scale(1.025)'},
-                                     transition: 'all .3s',
-                                     backgroundColor: '#f2f2f2',
-                                     minHeight: '108.01px',
-                                     display: 'flex',
-                                     justifyContent: 'center',
-                                     alignItems: 'center',
-                                     color: 'rgba(0,0,0,0.59)',
-                                     boxShadow: 1
-                                 }}>
-                                <AddIcon fontSize={'large'}/>
-                            </Box>
-                            <CreateSubjectModal open={openCreateSubjectModal} setOpen={setOpenCreateSubjectModal}
-                                                handleSubmit={handleCreateSubjectSubmit}/>
-                            <DeleteSubjectModal open={openDeleteSubjectModal} setOpen={setOpenDeleteSubjectModal}
-                                                handleSubmit={handleDeleteSubjectSubmit}/>
-                            <EditSubjectModal open={openEditSubjectModal} setOpen={setOpenEditSubjectModal}
-                                              handleSubmit={handleEditSubjectSubmit}/>
-                        </Grid> : ''
-                    }
+            <>
+                <ResponsiveAppBar>
+                    <Box sx={{minHeight:'90vh'}}>
+                        <Grid container spacing={3} sx={{sm: {justifyContent: 'center'}}}>
+                            {
+                                data?.data?.map((item) => (
+                                    <Grid key={item.id} item lg={3} md={4} sm={6} xs={12}>
+                                        <ActionAreaCard subject={item}
+                                                        handleOpenDeleteSubjectModal={handleOpenDeleteSubjectModal}
+                                                        handleOpenEditSubjectModal={handleOpenEditSubjectModal}/>
+                                    </Grid>
+                                ))
+                            }
+                            {
+                                localStorage.getItem('role') !== 'ROLE_USER' ? <Grid item lg={3} md={4} sm={6} xs={12}>
+                                    <Box onClick={handleOpenCreateSubjectModal}
+                                         sx={{
+                                             borderRadius: 1.5,
+                                             '&:hover': {transform: 'scale(1.025)'},
+                                             transition: 'all .3s',
+                                             backgroundColor: '#f2f2f2',
+                                             minHeight: '108.01px',
+                                             display: 'flex',
+                                             justifyContent: 'center',
+                                             alignItems: 'center',
+                                             color: 'rgba(0,0,0,0.59)',
+                                             boxShadow: 1
+                                         }}>
+                                        <AddIcon fontSize={'large'}/>
+                                    </Box>
+                                    <CreateSubjectModal open={openCreateSubjectModal} setOpen={setOpenCreateSubjectModal}
+                                                        handleSubmit={handleCreateSubjectSubmit}/>
+                                    <DeleteSubjectModal open={openDeleteSubjectModal} setOpen={setOpenDeleteSubjectModal}
+                                                        handleSubmit={handleDeleteSubjectSubmit}/>
+                                    <EditSubjectModal open={openEditSubjectModal} setOpen={setOpenEditSubjectModal}
+                                                      handleSubmit={handleEditSubjectSubmit}/>
+                                </Grid> : ''
+                            }
 
-                </Grid>
-
-            </ResponsiveAppBar>
+                        </Grid>
+                    </Box>
+                </ResponsiveAppBar>
+                <Footer/>
+            </>
         );
     }
 }

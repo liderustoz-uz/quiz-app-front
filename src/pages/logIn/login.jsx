@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
-import {memo, useEffect, useState} from 'react';
+import {memo} from 'react';
 import {axiosInstance} from "../../config";
 import {signInSuccess} from "../../redux/actions/actions";
 
@@ -18,7 +18,6 @@ const theme = createTheme();
 
 const Login = () => {
     const navigate = useNavigate()
-    const [error, setError] = useState(false)
 
 
 
@@ -101,10 +100,6 @@ const Login = () => {
                                 // type="password"
                                 // autoFocus
                             />
-                            {error && <Typography component="p" variant="p"
-                                                  style={{textAlign: 'center', marginTop: "12px", color: "#dc3545"}}>
-                                Could not sign in with the provided credentials.
-                            </Typography>}
 
                             <Button
                                 type="submit"
