@@ -117,7 +117,7 @@ function TestingUser() {
                                                     padding: 1,
                                                     borderRadius: 2,
                                                     fontFamily: 'Nunito,sans-serif',
-                                                }}>{index + 1}.{item.question}</Typography>
+                                                }}>{index + 1}) {item.question}</Typography>
                                             </Box>
                                             <Box>
                                                 {

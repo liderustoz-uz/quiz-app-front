@@ -8,6 +8,7 @@ import Subjects from "./pages/subjects/subjects";
 import {useEffect} from "react";
 import TestingAdmin from "./pages/testing/testingAdmin";
 import TestingUser from "./pages/testing/testingUser";
+import About from "./pages/about/about";
 
 function App() {
     const navigate = useNavigate()
@@ -28,6 +29,7 @@ function App() {
             <Route path={'/login'} element={<Login/>}/>
             <Route path={'/signup'} element={<Signup/>}/>
             <Route path={'/'} element={<Home/>}/>
+            <Route path={'/about'} element={<About/>}/>
             {
                 localStorage.getItem('user') &&
                 <Route path={'/subjects'} element={<Subjects/>}/>

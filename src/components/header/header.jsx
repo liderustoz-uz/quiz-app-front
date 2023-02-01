@@ -106,7 +106,7 @@ function ResponsiveAppBar({children}) {
                                 {pages.map((page) => (
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center"
-                                                    sx={{fontFamily: 'Nunito,sans-serif',}}>{page}</Typography>
+                                                    sx={{fontFamily: 'Nunito,sans-serif',}} onClick={page==='TestUz haqida'?()=>navigate('/about'):''}>{page}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -137,7 +137,7 @@ function ResponsiveAppBar({children}) {
                                     onClick={handleCloseNavMenu}
                                     sx={{my: 2, color: 'black', display: 'block', fontFamily: 'Nunito,sans-serif',}}
                                 >
-                                    {page}
+                                    <Typography onClick={page==='TestUz haqida'?()=>navigate('/about'):''}>{page}</Typography>
                                 </Button>
                             ))}
                         </Box>
