@@ -20,7 +20,7 @@ function ActionAreaCard({subject, handleOpenDeleteSubjectModal, handleOpenEditSu
             transition: 'all .3s',
             backgroundColor: '#f2f2f2'
         }}
-              onClick={localStorage.getItem('role') === 'ROLE_USER' ? () => navigate(`/test/${subject.name}/${subject.id}`) : null}>
+              onClick={localStorage.getItem('role') === 'ROLE_USER' ? () => navigate(`/test/${subject.name}/${subject.id}/user`) : () => navigate(`/test/${subject.name}/${subject.id}/admin`)}>
             <CardActionArea>
                 {/*<CardMedia*/}
                 {/*    component="img"*/}

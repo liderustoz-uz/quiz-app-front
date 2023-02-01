@@ -1,4 +1,4 @@
-import React, {memo, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {axiosInstance} from "../../config";
 import {useQuery, useQueryClient} from "react-query";
 import {useParams} from "react-router-dom";
@@ -15,8 +15,11 @@ import EditQuestionModal from "../../components/editQuestionModal/editQuestionMo
 import DeleteQuestionModal from "../../components/deleteQuestionModal/deleteQuestionModal";
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import Footer from "../../components/footer/footer";
+import {useSelector} from "react-redux";
 
-function Testing() {
+function TestingAdmin() {
+    const {roleUserTests} = useSelector(state => state)
+    console.log(roleUserTests)
     const params = useParams()
     const queryClient = useQueryClient()
     const [questionCreateModal, setQuestionCreateModal] = useState(false)
@@ -26,35 +29,21 @@ function Testing() {
     const [clickedVariants, setClickedVariants] = useState(false)
     const [clickedIndex, setClickedIndex] = useState({father: null, children: null})
     const fetchTest = async () => {
-        if (localStorage.getItem('role') === 'ROLE_ADMIN') {
-            const response = await axiosInstance.post('test/subject', {
-                    subjectId: params.id
-                },
-                {
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem('user')
-                    }
+        const response = await axiosInstance.post('test/subject', {
+                subjectId: params.id
+            },
+            {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem('user')
                 }
-            )
-            return response
-        } else {
-            const response = await axiosInstance.post('test/random-tests', {
-                    subjectId: params?.id,
-                    count: 10
-                },
-                {
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem('user')
-                    }
-                }
-            )
-            return response
-        }
-
+            }
+        )
+        return response
     };
 
     const {data, status} = useQuery('Test', fetchTest)
-    console.log(data)
+
+
 
     const handleOpenCreateQuestionModal = () => setQuestionCreateModal(true);
     const handleCreateQuestionSubmit = async (event) => {
@@ -223,11 +212,11 @@ function Testing() {
                         backgroundColor: 'rgba(86,86,86,0.15)',
                         borderRadius: 2,
                         padding: 2,
-                        minHeight:'77vh'
+                        minHeight: '77vh'
                         // gap: 3
                     }}>
                         {
-                            data.data.length > 0 ? <Box sx={{
+                                data.data.length > 0 ? <Box sx={{
                                     // border: '1px solid #f3f3f3',
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -310,8 +299,8 @@ function Testing() {
                                 </Box> :
                                 <Typography sx={{textAlign: 'center'}} color={'error'}>Test mavjud emas</Typography>
                         }
+
                         {
-                            localStorage.getItem('role') === 'ROLE_ADMIN' &&
                             <>
                                 <Box
                                     sx={{
@@ -350,4 +339,4 @@ function Testing() {
     }
 }
 
-export default memo(Testing);
+export default memo(TestingAdmin);

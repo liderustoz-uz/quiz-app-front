@@ -1,2 +1,4 @@
 export const SIGNIN_SUCCESS="SIGNIN_SUCCESS";
 export const SIGNOUT_SUCCESS="SIGNOUT_SUCCESS";
+export const HUNDLE_TESTS="HUNDLE_TESTS";
+export const GET_DATA="GET_DATA";

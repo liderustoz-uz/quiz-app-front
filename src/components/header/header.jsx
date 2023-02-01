@@ -18,8 +18,6 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 function ResponsiveAppBar({children}) {
     const pages = ['Mahsulotlar', 'TestUz haqida'];
     const settings = ['Chiqish'];
-    console.log((localStorage.getItem('role')))
-    console.log((localStorage.getItem('token')))
     const navigate = useNavigate()
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
@@ -42,7 +40,6 @@ function ResponsiveAppBar({children}) {
     const logOut = () => {
         localStorage.removeItem('user')
         localStorage.removeItem('role')
-        localStorage.removeItem('token')
         navigate('/')
     }
     const logIn = () => {

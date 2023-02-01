@@ -3,9 +3,11 @@ import Home from "./pages/home/home";
 import Login from "./pages/logIn/login";
 import Signup from "./pages/signUp/signup";
 import './globalStyle/style.css'
-import Testing from "./pages/testing/testing";
+import Testing from "./pages/testing/testingAdmin";
 import Subjects from "./pages/subjects/subjects";
 import {useEffect} from "react";
+import TestingAdmin from "./pages/testing/testingAdmin";
+import TestingUser from "./pages/testing/testingUser";
 
 function App() {
     const navigate = useNavigate()
@@ -32,7 +34,11 @@ function App() {
             }
             {
                 localStorage.getItem('user') &&
-                <Route path={'/test/:subject/:id'} element={<Testing/>}/>
+                <Route path={'/test/:subject/:id/admin'} element={<TestingAdmin/>}/>
+            }
+            {
+                localStorage.getItem('user') &&
+                <Route path={'/test/:subject/:id/user'} element={<TestingUser/>}/>
             }
         </Routes>
     );
