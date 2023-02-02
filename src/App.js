@@ -18,7 +18,6 @@ function App() {
             localStorage.removeItem("user");
             navigate('/')
         }, 3600 * 1000);
-        console.log('delete')
         return () => {
             clearTimeout(timeout);
         };

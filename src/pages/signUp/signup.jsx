@@ -84,7 +84,6 @@ const SignUp = () => {
                                 username: data.get('userName'),
                                 password: data.get('password'),
                             })
-                            console.log(res)
                             navigate("/subjects")
                             localStorage.setItem('user', res.data.token)
                         } catch (e) {
@@ -107,13 +106,6 @@ const SignUp = () => {
             setFirstNameError(true)
             // AlertFunction(setAlert, "warning", 'Ism kiritilmagan')
         }
-
-        console.log({
-            firstName: data.get('firstName'),
-            lastName: data.get('lastName'),
-            username: data.get('userName'),
-            password: data.get('password'),
-        })
     };
 
     return (

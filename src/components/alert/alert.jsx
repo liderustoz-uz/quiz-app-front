@@ -10,7 +10,6 @@ export const AlertFunction = (setAlert, status, text) => {
 }
 
 function AlertContent({alert}) {
-    console.log(alert)
     return (
         <Box sx={{position: 'absolute', top: '50px', left: '50px', right: '50px'}}>
             {alert.open && (

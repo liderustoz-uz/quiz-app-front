@@ -29,7 +29,6 @@ const Login = () => {
                 username: data.get('userName'),
                 password: data.get('password'),
             })
-            console.log(res)
             navigate("/subjects")
             signInSuccess(res.data.token)
             localStorage.setItem('user', res.data.token)
@@ -38,10 +37,6 @@ const Login = () => {
             console.log(e);
             e.response.message === 'username_already_taken' && AlertFunction(setAlert, "warning", "Bu foydalanuvchi nomi allaqachon olingan")
         }
-        console.log({
-            username: data.get('userName'),
-            password: data.get('password'),
-        })
     };
 
     return (

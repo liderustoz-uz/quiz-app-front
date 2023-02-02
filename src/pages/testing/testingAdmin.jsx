@@ -20,7 +20,6 @@ import {useSelector} from "react-redux";
 function TestingAdmin() {
     const {roleUserTests} = useSelector(state => state)
     const navigate=useNavigate()
-    console.log(roleUserTests)
     const params = useParams()
     const queryClient = useQueryClient()
     const [questionCreateModal, setQuestionCreateModal] = useState(false)
@@ -50,7 +49,6 @@ function TestingAdmin() {
     const handleCreateQuestionSubmit = async (event) => {
         event?.preventDefault();
         const formData = new FormData(event.currentTarget);
-        console.log(formData)
         try {
             const res = await axiosInstance.post('test', {
                     subjectId: parseInt(params.id),
@@ -79,42 +77,16 @@ function TestingAdmin() {
                         Authorization: "Bearer " + localStorage.getItem('user')
                     }
                 })
-
-            console.log(res)
             queryClient.invalidateQueries('Test')
         } catch (e) {
             console.log(e);
         }
-
         setQuestionCreateModal(false)
-        console.log({
-            subjectId: parseInt(params.id),
-            question: formData.get('question'),
-            variants: [
-                {
-                    text: formData.get('variant1'),
-                    isTrue: true
-                },
-                {
-                    text: formData.get('variant2'),
-                    isTrue: false
-                },
-                formData.get('variant3').length > 0 ? {
-                    text: formData.get('variant3'),
-                    isTrue: false
-                } : null,
-                formData.get('variant4').length > 0 ? {
-                    text: formData.get('variant4'),
-                    isTrue: false
-                } : null
-            ]
-        })
     };
 
     const handleEditQuestionSubmit = async (event) => {
         event?.preventDefault();
         const formData = new FormData(event.currentTarget);
-        console.log(formData)
         try {
             const res = await axiosInstance.put('test', {
                     id: questionEditModal.obj.id,
@@ -144,7 +116,6 @@ function TestingAdmin() {
                         Authorization: "Bearer " + localStorage.getItem('user')
                     }
                 })
-            console.log(res)
             queryClient.invalidateQueries('Test')
         } catch (e) {
             console.log(e);
@@ -160,7 +131,6 @@ function TestingAdmin() {
                     Authorization: "Bearer " + localStorage.getItem('user')
                 }
             })
-            console.log(res)
             queryClient.invalidateQueries('Test')
         } catch (e) {
             console.log(e);
@@ -169,7 +139,6 @@ function TestingAdmin() {
     };
 
     const hundleVariant = (boolen, index, indexIn) => {
-        console.log(boolen)
         setVariantsBackground(boolen)
         setClickedVariants(true)
         setClickedIndex({father: index, children: indexIn})
