@@ -16,7 +16,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 function ResponsiveAppBar({children}) {
-    const pages = ['Mahsulotlar', 'TestUz haqida'];
+    const pages = ['Biz haqimizda', localStorage.getItem('user') && 'Fanlar'];
     const settings = ['Chiqish'];
     const navigate = useNavigate()
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -71,7 +71,7 @@ function ResponsiveAppBar({children}) {
                                 textDecoration: 'none',
                             }}
                         >
-                            TestUz
+                            LiderUstoz
                         </Typography>
 
                         <Box sx={{flexGrow: 1, display: {xs: 'flex', md: 'none'}, color: 'black'}}>
@@ -106,7 +106,8 @@ function ResponsiveAppBar({children}) {
                                 {pages.map((page) => (
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center"
-                                                    sx={{fontFamily: 'Nunito,sans-serif',}} onClick={page==='TestUz haqida'?()=>navigate('/about'):''}>{page}</Typography>
+                                                    sx={{fontFamily: 'Nunito,sans-serif',}}
+                                                    onClick={page === 'Fanlar' ? () => navigate('/subjects') : () => navigate('/about')}>{page}</Typography>
                                     </MenuItem>
                                 ))}
                             </Menu>
@@ -128,7 +129,7 @@ function ResponsiveAppBar({children}) {
                                 textDecoration: 'none',
                             }}
                         >
-                            TestUz
+                            LiderUstoz
                         </Typography>
                         <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
                             {pages.map((page) => (
@@ -137,48 +138,53 @@ function ResponsiveAppBar({children}) {
                                     onClick={handleCloseNavMenu}
                                     sx={{my: 2, color: 'black', display: 'block', fontFamily: 'Nunito,sans-serif',}}
                                 >
-                                    <Typography onClick={page==='TestUz haqida'?()=>navigate('/about'):''}>{page}</Typography>
+                                    <Typography
+                                        onClick={page === 'Fanlar' ? () => navigate('/subjects') : () => navigate('/about')}>{page}</Typography>
                                 </Button>
                             ))}
                         </Box>
 
-                        {(localStorage.getItem('role')&&localStorage.getItem('user')) ? <Box sx={{flexGrow: 0}}>
-                            <Tooltip title="Open settings">
-                                <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
-                                    {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>*/}
-                                    <AccountCircleIcon fontSize={'large'}/>
-                                </IconButton>
-                            </Tooltip>
-                            <Menu
-                                sx={{mt: '45px'}}
-                                id="menu-appbar"
-                                anchorEl={anchorElUser}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorElUser)}
-                                onClose={handleCloseUserMenu}
-                            >
-                                {settings.map((setting) => (
-                                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                        <Typography textAlign="center" sx={{fontFamily: 'Nunito,sans-serif',}}
-                                                    onClick={logOut}>{setting}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu>
-                        </Box> : <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
-                            <Button variant={'outlined'} color={'inherit'} onClick={logIn}
-                                    sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Kirish</Button>
-                            <Button variant={'outlined'} color={'inherit'} onClick={signUp}
-                                    sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Ro'yxatdan
-                                o'tish</Button>
-                        </Box>
+                        {(localStorage.getItem('role') && localStorage.getItem('user')) ?
+                            //     <Box sx={{flexGrow: 0}}>
+                            //     <Tooltip title="Open settings">
+                            //         <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
+                            //             {/*<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg"/>*/}
+                            //             <AccountCircleIcon fontSize={'large'}/>
+                            //         </IconButton>
+                            //     </Tooltip>
+                            //     <Menu
+                            //         sx={{mt: '45px'}}
+                            //         id="menu-appbar"
+                            //         anchorEl={anchorElUser}
+                            //         anchorOrigin={{
+                            //             vertical: 'top',
+                            //             horizontal: 'right',
+                            //         }}
+                            //         keepMounted
+                            //         transformOrigin={{
+                            //             vertical: 'top',
+                            //             horizontal: 'right',
+                            //         }}
+                            //         open={Boolean(anchorElUser)}
+                            //         onClose={handleCloseUserMenu}
+                            //     >
+                            //         {settings.map((setting) => (
+                            //             <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                            //                 <Typography textAlign="center" sx={{fontFamily: 'Nunito,sans-serif',}}
+                            //                             onClick={logOut}>{setting}</Typography>
+                            //             </MenuItem>
+                            //         ))}
+                            //     </Menu>
+                            // </Box>
+                            <Button variant={'outlined'} color={'inherit'} onClick={logOut}
+                                    sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Chiqish</Button> :
+                            <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
+                                <Button variant={'outlined'} color={'inherit'} onClick={logIn}
+                                        sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Kirish</Button>
+                                <Button variant={'outlined'} color={'inherit'} onClick={signUp}
+                                        sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Ro'yxatdan
+                                    o'tish</Button>
+                            </Box>
                         }
                     </Toolbar>
                 </Container>

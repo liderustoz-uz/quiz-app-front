@@ -13,75 +13,81 @@ import CountingData from "../../components/countingData/countingData";
 
 function Home() {
     const queryClient = useQueryClient()
-    const fetchSubjects = async () => {
-        const res = await axiosInstance.get('subject/list',
-            {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem('user')
-                }
-            }
-        )
-        return res
-    };
+    // const fetchSubjects = async () => {
+    //     const res = await axiosInstance.get('subject/list',
+    //         {
+    //             headers: {
+    //                 Authorization: "Bearer " + localStorage.getItem('user')
+    //             }
+    //         }
+    //     )
+    //     return res
+    // };
+    //
+    // const {data, status} = useQuery('Subjects', fetchSubjects)
+    // console.log(data)
 
-    const {data, status} = useQuery('Subjects', fetchSubjects)
-    console.log(data)
 
+    // if (status === 'loading') {
+    //     return (
+    //         <Box sx={{
+    //             minHeight: '100vh',
+    //             width: '100%',
+    //             display: 'flex',
+    //             alignItems: 'center',
+    //             justifyContent: 'center'
+    //         }}>
+    //             <Loading/>
+    //         </Box>
+    //     )
+    // }
+    //
+    // if (status === 'error') {
+    //     return (
+    //         <>
+    //             error
+    //         </>
+    //     )
+    // }
 
-    if (status === 'loading') {
-        return (
-            <Box sx={{
-                minHeight: '100vh',
-                width: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}>
-                <Loading/>
-            </Box>
-        )
-    }
-
-    if (status === 'error') {
-        return (
-            <>
-                error
-            </>
-        )
-    }
-
-    if (status === 'success') {
-        return (
-            <>
-                <ResponsiveAppBar>
-                    <Box sx={{maxWidth:'1440px',mx:'auto'}}>
-                        <Grid container sx={{sm: {justifyContent: 'center'},minHeight:'90vh', alignItems:'center',justifyContent:'center',margin:'0'}}>
-                            <Grid item lg={6} md={6} sm={12} xs={12} sx={{display:'block',paddingLeft:'60px'}}>
-                                <Typography variant={'span'} sx={{display:'block',fontSize:'40px',fontWeight:'bold'}}>
-                                    O‘z bilimingizni sinang!
-                                </Typography>
-                                <Typography variant={'span'}>
-                                    TestUz – bu o‘qituvchilarni tayyorgarlik ko‘rishi uchun sinov platformasidir.
-                                </Typography>
-                            </Grid>
-                            <Grid item lg={6} md={6} sm={12} xs={12}>
-                                <CardMedia
-                                    component="img"
-                                    // height="194"
-                                    width={"600"}
-                                    image={imageHome}
-                                    alt="Paella dish"
-                                />
-                            </Grid>
+    // if (status === 'success') {
+    return (
+        <>
+            <ResponsiveAppBar>
+                <Box sx={{maxWidth: '1440px', mx: 'auto'}}>
+                    <Grid container sx={{
+                        sm: {justifyContent: 'center'},
+                        minHeight: '90vh',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '0'
+                    }}>
+                        <Grid item lg={6} md={6} sm={12} xs={12} sx={{display: 'block', paddingLeft: '60px'}}>
+                            <Typography variant={'span'} sx={{display: 'block', fontSize: '40px', fontWeight: 'bold'}}>
+                                O‘z bilimingizni sinang!
+                            </Typography>
+                            <Typography variant={'span'}>
+                                TestUz – bu o‘qituvchilarni tayyorgarlik ko‘rishi uchun sinov platformasidir.
+                            </Typography>
                         </Grid>
-                    </Box>
-                    <CountingData/>
-                </ResponsiveAppBar>
-                    <Footer/>
-            </>
+                        <Grid item lg={6} md={6} sm={12} xs={12}>
+                            <CardMedia
+                                component="img"
+                                // height="194"
+                                width={"600"}
+                                image={imageHome}
+                                alt="Paella dish"
+                            />
+                        </Grid>
+                    </Grid>
+                </Box>
+                <CountingData/>
+            </ResponsiveAppBar>
+            <Footer/>
+        </>
 
-        );
-    }
+    );
+    // }
 }
 
 export default memo(Home);

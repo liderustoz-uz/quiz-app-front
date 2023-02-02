@@ -26,7 +26,7 @@ function About(props) {
                             </Box>
                         </Grid>
                         <Grid item lg={6} md={6} sm={12} xs={12} sx={{textAlign: 'center'}}>
-                            <Typography variant={'h4'}>Test Uz nima?</Typography>
+                            <Typography variant={'h4'}>LiderUstoz nima?</Typography>
                             <Typography>
                                 Bu o'qituvchi pedagoglarni o'z ustida ishlashi va kelajak avlodlarga yanada yetuk bilim berish salohiyatini oshirish uchun yaratilgan.
                             </Typography>

@@ -120,21 +120,21 @@ const SignUp = () => {
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{height: '100vh'}}>
                 <CssBaseline/>
-                <Grid
-                    item
-                    xs={false}
-                    sm={4}
-                    md={7}
-                    sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random?signup)',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                    }}
-                />
-                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                {/*<Grid*/}
+                {/*    item*/}
+                {/*    xs={false}*/}
+                {/*    sm={4}*/}
+                {/*    md={7}*/}
+                {/*    sx={{*/}
+                {/*        backgroundImage: 'url(https://source.unsplash.com/random?signup)',*/}
+                {/*        backgroundRepeat: 'no-repeat',*/}
+                {/*        backgroundColor: (t) =>*/}
+                {/*            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],*/}
+                {/*        backgroundSize: 'cover',*/}
+                {/*        backgroundPosition: 'center',*/}
+                {/*    }}*/}
+                {/*/>*/}
+                <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square>
                     <Box
                         sx={{
                             my: 8,
@@ -144,19 +144,20 @@ const SignUp = () => {
                             alignItems: 'center',
                         }}
                     >
-                        <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-                            <LockOutlinedIcon/>
-                        </Avatar>
-                        <Typography component="h1" variant="h5">
+                        {/*<Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>*/}
+                        {/*    <LockOutlinedIcon/>*/}
+                        {/*</Avatar>*/}
+                        <Typography component="h1" variant="h4">
                             Ro'yxatdan o'tish
                         </Typography>
                         <Box component="form" noValidate
                              onSubmit={handleSubmit}
-                             sx={{mt: 1}} style={{width: "90%"}}>
+                             sx={{mt: 5}} style={{maxWidth: "360px"}}>
                             <TextField
                                 margin="normal"
                                 required
                                 error={firstNameError}
+                                helperText={firstNameError&&'Ism kiritilmagan'}
                                 fullWidth
                                 id="firstName"
                                 label="Ism"
@@ -168,6 +169,7 @@ const SignUp = () => {
                                 margin="normal"
                                 required
                                 error={lastNameError}
+                                helperText={lastNameError&&'Familya kiritilmagan'}
                                 fullWidth
                                 id="lastName"
                                 name="lastName"
@@ -180,8 +182,9 @@ const SignUp = () => {
                                 required
                                 fullWidth
                                 error={userNameError}
+                                helperText={userNameError&&'Tahallus 4 dan ko\'p 10 dan kam bo\'lishi kerak'}
                                 name="userName"
-                                label="Tahallus"
+                                label="Foydalanuvchi nomi"
                                 type="text"
                                 id="userName"
                                 autoComplete="userName"
@@ -191,6 +194,7 @@ const SignUp = () => {
                                 required
                                 fullWidth
                                 error={passwordError}
+                                helperText={passwordError&&"Parol son, harf, katta harf, \"!,@,#...\" va belgilar soni 8 dan ziyot bulishi kerak"}
                                 name="password"
                                 label="Parol"
                                 // type="password"
@@ -207,7 +211,8 @@ const SignUp = () => {
                             <Button
                                 type="submit"
                                 fullWidth
-                                variant="contained"
+                                color={'inherit'}
+                                variant="outlined"
                                 sx={{mt: 3, mb: 2}}
                             >
                                 Ro'yxatdan o'tish
@@ -219,7 +224,7 @@ const SignUp = () => {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link to="" variant="body2" onClick={() => navigate('/login')}>
+                                    <Link to="" color={'inherit'} variant="body2" onClick={() => navigate('/login')}>
                                         Accountingiz bormi ? Kirish
                                     </Link>
                                 </Grid>

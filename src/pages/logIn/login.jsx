@@ -6,19 +6,19 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
-import {memo} from 'react';
+import {memo, useState} from 'react';
 import {axiosInstance} from "../../config";
 import {signInSuccess} from "../../redux/actions/actions";
+import AlertContent, {AlertFunction} from "../../components/alert/alert";
 
 const theme = createTheme();
 
 const Login = () => {
     const navigate = useNavigate()
-
+    const [alert, setAlert] = useState({open: false, text: "", status: ""});
 
 
     const handleSubmit = async (event) => {
@@ -36,7 +36,7 @@ const Login = () => {
             localStorage.setItem('role', res.data.user.role)
         } catch (e) {
             console.log(e);
-            // setError(true);
+            e.response.message === 'username_already_taken' && AlertFunction(setAlert, "warning", "Bu foydalanuvchi nomi allaqachon olingan")
         }
         console.log({
             username: data.get('userName'),
@@ -48,21 +48,21 @@ const Login = () => {
         <ThemeProvider theme={theme}>
             <Grid container component="main" sx={{height: '100vh'}}>
                 <CssBaseline/>
-                <Grid
-                    item
-                    xs={false}
-                    sm={4}
-                    md={7}
-                    sx={{
-                        backgroundImage: 'url(https://source.unsplash.com/random?login)',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundColor: (t) =>
-                            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                    }}
-                />
-                <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+                {/*<Grid*/}
+                {/*    item*/}
+                {/*    xs={false}*/}
+                {/*    sm={4}*/}
+                {/*    md={7}*/}
+                {/*    sx={{*/}
+                {/*        backgroundImage: 'url(https://source.unsplash.com/random?login)',*/}
+                {/*        backgroundRepeat: 'no-repeat',*/}
+                {/*        backgroundColor: (t) =>*/}
+                {/*            t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],*/}
+                {/*        backgroundSize: 'cover',*/}
+                {/*        backgroundPosition: 'center',*/}
+                {/*    }}*/}
+                {/*/>*/}
+                <Grid item xs={12} sm={12} md={12} component={Paper} elevation={6} square>
                     <Box
                         sx={{
                             my: 8,
@@ -72,21 +72,21 @@ const Login = () => {
                             alignItems: 'center',
                         }}
                     >
-                        <Avatar sx={{m: 1, bgcolor: 'secondary.main'}}>
-                            <LockOutlinedIcon/>
-                        </Avatar>
-                        <Typography component="h1" variant="h5">
+                        {/*<Avatar sx={{m: 1}}>*/}
+                        {/*    <LockOutlinedIcon/>*/}
+                        {/*</Avatar>*/}
+                        <Typography component="h1" variant="h4">
                             Kirish
                         </Typography>
                         <Box component="form" noValidate
                              onSubmit={handleSubmit}
-                             sx={{mt: 1}} style={{width: "90%"}}>
+                             sx={{mt: 5}} style={{maxWidth: "360px"}}>
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
                                 id="userName"
-                                label="Tahallus"
+                                label="Foydalanuvchi nomi"
                                 name="userName"
                                 autoFocus
                             />
@@ -104,7 +104,8 @@ const Login = () => {
                             <Button
                                 type="submit"
                                 fullWidth
-                                variant="contained"
+                                variant="outlined"
+                                color={'inherit'}
                                 sx={{mt: 3, mb: 2}}
                             >
                                 Kirish
@@ -117,7 +118,8 @@ const Login = () => {
                                     </Link>
                                 </Grid>
                                 <Grid item>
-                                    <Link href="#" variant="body2" onClick={() => navigate('/signup')}>
+                                    <Link href="#" variant="body2" color={'inherit'}
+                                          onClick={() => navigate('/signup')}>
                                         Ro'yxatdan o'tish
                                     </Link>
                                 </Grid>
@@ -126,6 +128,7 @@ const Login = () => {
                     </Box>
                 </Grid>
             </Grid>
+            <AlertContent alert={alert}/>
         </ThemeProvider>
     );
 }

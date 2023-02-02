@@ -1,6 +1,6 @@
 import React, {memo, useEffect, useState} from 'react';
 import {axiosInstance} from "../../config";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {Typography} from "@mui/material";
 import ResponsiveAppBar from "../../components/header/header";
 import Box from "@mui/material/Box";
@@ -11,6 +11,7 @@ import {getDataRedux, roleUserHandleTest} from "../../redux/actions/actions";
 
 function TestingUser() {
     const {roleUserTests} = useSelector(state => state)
+    const navigate=useNavigate()
     console.log(roleUserTests)
     const [result, setResult] = useState(0);
     const params = useParams()
@@ -154,7 +155,9 @@ function TestingUser() {
                             </Box> :
                             <Typography sx={{textAlign: 'center'}} color={'error'}>Test mavjud emas</Typography>
                     }
-
+                </Box>
+                <Box sx={{display:'flex',justifyContent:'end'}}>
+                    <Button sx={{marginTop:2,fontWeight:'bold',fontFamily:'Nunito,sans-serif'}} variant={'outlined'} color={'inherit'} onClick={()=>navigate('/subjects')}>Ortga</Button>
                 </Box>
             </ResponsiveAppBar>
             <Footer/>
