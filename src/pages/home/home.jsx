@@ -67,7 +67,7 @@ function Home() {
                                 O‘z bilimingizni sinang!
                             </Typography>
                             <Typography variant={'span'}>
-                                TestUz – bu o‘qituvchilarni tayyorgarlik ko‘rishi uchun sinov platformasidir.
+                                LiderUstoz – bu o‘qituvchilarni tayyorgarlik ko‘rishi uchun sinov platformasidir.
                             </Typography>
                         </Grid>
                         <Grid item lg={6} md={6} sm={12} xs={12}>
