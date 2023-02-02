@@ -93,19 +93,19 @@ const SignUp = () => {
                         }
                     } else {
                         setPasswordError(true);
-                        AlertFunction(setAlert, "warning", "Parol son, harf, katta harf, \"!,@,#...\" va belgilar soni 8 dan ziyot bulishi kerak")
+                        // AlertFunction(setAlert, "warning", "Parol son, harf, katta harf, \"!,@,#...\" va belgilar soni 8 dan ziyot bulishi kerak")
                     }
                 } else {
                     setUserNameError(true)
-                    AlertFunction(setAlert, "warning", 'Tahallus 4 dan ko\'p 10 dan kam bo\'lishi kerak')
+                    // AlertFunction(setAlert, "warning", 'Tahallus 4 dan ko\'p 10 dan kam bo\'lishi kerak')
                 }
             } else {
                 setLastNameError(true)
-                AlertFunction(setAlert, "warning", 'Familya kiritilmagan')
+                // AlertFunction(setAlert, "warning", 'Familya kiritilmagan')
             }
         } else {
             setFirstNameError(true)
-            AlertFunction(setAlert, "warning", 'Ism kiritilmagan')
+            // AlertFunction(setAlert, "warning", 'Ism kiritilmagan')
         }
 
         console.log({
