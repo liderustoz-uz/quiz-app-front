@@ -181,9 +181,9 @@ function ResponsiveAppBar({children}) {
                             <Box sx={{display: 'flex', alignItems: 'center', gap: 1}}>
                                 <Button variant={'outlined'} color={'inherit'} onClick={logIn}
                                         sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Kirish</Button>
-                                <Button variant={'outlined'} color={'inherit'} onClick={signUp}
-                                        sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Ro'yxatdan
-                                    o'tish</Button>
+                                {/*<Button variant={'outlined'} color={'inherit'} onClick={signUp}*/}
+                                {/*        sx={{fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}>Ro'yxatdan*/}
+                                {/*    o'tish</Button>*/}
                             </Box>
                         }
                     </Toolbar>
