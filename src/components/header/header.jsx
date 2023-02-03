@@ -11,6 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import {memo, useState} from "react";
 import {useNavigate} from "react-router-dom";
+import logo from "../../assets/logo.jpg"
 
 
 function ResponsiveAppBar({children}) {
@@ -53,7 +54,7 @@ function ResponsiveAppBar({children}) {
             <AppBar position="static" sx={{backgroundColor: 'rgba(255,255,255,0)', color: 'black'}}>
                 <Container maxWidth="xl">
                     <Toolbar disableGutters>
-                        <ImportContactsIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>
+                        {/*<ImportContactsIcon sx={{display: {xs: 'none', md: 'flex'}, mr: 1}}/>*/}
                         <Typography
                             variant="h6"
                             noWrap
@@ -61,14 +62,15 @@ function ResponsiveAppBar({children}) {
                             href="/"
                             sx={{
                                 mr: 2,
-                                display: {xs: 'none', md: 'flex'},
+                                display: {xs: 'none', md: 'flex',alignItems: 'center'},
                                 fontFamily: 'Nunito,sans-serif',
                                 fontWeight: 700,
-                                letterSpacing: '.3rem',
+                                letterSpacing: '.1rem',
                                 color: 'inherit',
                                 textDecoration: 'none',
                             }}
                         >
+                        <img style={{width:'40px',marginRight:5}} src={logo} alt="logo"/>
                             LiderUstoz
                         </Typography>
 
@@ -118,7 +120,7 @@ function ResponsiveAppBar({children}) {
                                 }
                             </Menu>
                         </Box>
-                        <ImportContactsIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
+                        {/*<ImportContactsIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>*/}
                         <Typography
                             variant="h5"
                             noWrap
@@ -126,15 +128,16 @@ function ResponsiveAppBar({children}) {
                             href=""
                             sx={{
                                 mr: 2,
-                                display: {xs: 'flex', md: 'none'},
+                                display: {xs: 'flex', md: 'none',alignItems: 'center'},
                                 flexGrow: 1,
                                 fontFamily: 'Nunito,sans-serif',
                                 fontWeight: 700,
-                                letterSpacing: '.3rem',
+                                letterSpacing: '.1rem',
                                 color: 'inherit',
                                 textDecoration: 'none',
                             }}
                         >
+                            <img style={{width:'40px',marginRight:5}} src={logo} alt="logo"/>
                             LiderUstoz
                         </Typography>
                         <Box sx={{flexGrow: 1, display: {xs: 'none', md: 'flex'}}}>
