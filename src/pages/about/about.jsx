@@ -11,7 +11,7 @@ function About() {
     return (
         <>
             <ResponsiveAppBar>
-                <Box sx={{minHeight: '88vh',marginTop:3}}>
+                <Box sx={{minHeight: '88vh',marginTop:3,paddingX:'30px'}}>
                     <Grid container spacing={2} sx={{justifyContent: 'center',alignItems:'center'}}>
                         <Grid item lg={6} md={6} sm={12} xs={12} sx={{textAlign: 'center'}}>
                             <Box sx={{display:'flex',justifyContent:'center'}}>
