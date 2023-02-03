@@ -60,9 +60,10 @@ function Home() {
                         minHeight: '90vh',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        margin: '0'
+                        margin: '0',
+                        paddingX: '30px'
                     }}>
-                        <Grid item lg={6} md={6} sm={12} xs={12} sx={{display: 'block', paddingLeft: '60px'}}>
+                        <Grid item lg={6} md={6} sm={12} xs={12} sx={{display: 'block',}}>
                             <Typography variant={'span'} sx={{display: 'block', fontSize: '40px', fontWeight: 'bold'}}>
                                 O‘z bilimingizni sinang!
                             </Typography>

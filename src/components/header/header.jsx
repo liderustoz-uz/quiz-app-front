@@ -7,16 +7,14 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import ImportContactsIcon from '@mui/icons-material/ImportContacts';
 import {memo, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 function ResponsiveAppBar({children}) {
-    const pages = ['Biz haqimizda', localStorage.getItem('user') && 'Fanlar'];
+    const pages = ['Biz haqimizda',];
     const settings = ['Chiqish'];
     const navigate = useNavigate()
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -107,9 +105,17 @@ function ResponsiveAppBar({children}) {
                                     <MenuItem key={page} onClick={handleCloseNavMenu}>
                                         <Typography textAlign="center"
                                                     sx={{fontFamily: 'Nunito,sans-serif',}}
-                                                    onClick={page === 'Fanlar' ? () => navigate('/subjects') : () => navigate('/about')}>{page}</Typography>
+                                                    onClick={() => navigate('/about')}>{page}</Typography>
                                     </MenuItem>
                                 ))}
+                                {
+                                    localStorage.getItem('user') &&
+                                    <MenuItem onClick={handleCloseNavMenu}>
+                                        <Typography textAlign="center"
+                                                    sx={{fontFamily: 'Nunito,sans-serif',}}
+                                                    onClick={() => navigate('/subjects')}>Fanlar</Typography>
+                                    </MenuItem>
+                                }
                             </Menu>
                         </Box>
                         <ImportContactsIcon sx={{display: {xs: 'flex', md: 'none'}, mr: 1}}/>
@@ -139,9 +145,19 @@ function ResponsiveAppBar({children}) {
                                     sx={{my: 2, color: 'black', display: 'block', fontFamily: 'Nunito,sans-serif',}}
                                 >
                                     <Typography
-                                        onClick={page === 'Fanlar' ? () => navigate('/subjects') : () => navigate('/about')}>{page}</Typography>
+                                        onClick={() => navigate('/about')}>{page}</Typography>
                                 </Button>
                             ))}
+                            {
+                                localStorage.getItem('user') &&
+                                <Button
+                                    onClick={handleCloseNavMenu}
+                                    sx={{my: 2, color: 'black', display: 'block', fontFamily: 'Nunito,sans-serif',}}>
+                                    <Typography textAlign="center"
+                                                sx={{fontFamily: 'Nunito,sans-serif',}}
+                                                onClick={() => navigate('/subjects')}>Fanlar</Typography>
+                                </Button>
+                            }
                         </Box>
 
                         {(localStorage.getItem('role') && localStorage.getItem('user')) ?
