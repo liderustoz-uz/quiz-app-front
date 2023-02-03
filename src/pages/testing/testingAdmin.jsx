@@ -1,4 +1,4 @@
-import React, {memo, useEffect, useState} from 'react';
+import React, {memo, useState} from 'react';
 import {axiosInstance} from "../../config";
 import {useQuery, useQueryClient} from "react-query";
 import {useNavigate, useParams} from "react-router-dom";
@@ -15,11 +15,9 @@ import EditQuestionModal from "../../components/editQuestionModal/editQuestionMo
 import DeleteQuestionModal from "../../components/deleteQuestionModal/deleteQuestionModal";
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import Footer from "../../components/footer/footer";
-import {useSelector} from "react-redux";
 
 function TestingAdmin() {
-    const {roleUserTests} = useSelector(state => state)
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const params = useParams()
     const queryClient = useQueryClient()
     const [questionCreateModal, setQuestionCreateModal] = useState(false)
@@ -28,8 +26,9 @@ function TestingAdmin() {
     const [variantsBackground, setVariantsBackground] = useState(false)
     const [clickedVariants, setClickedVariants] = useState(false)
     const [clickedIndex, setClickedIndex] = useState({father: null, children: null})
-    const fetchTest = async () => {
-        const response = await axiosInstance.post('test/subject', {
+
+    const {data, status} = useQuery('Test', async () => {
+        return await axiosInstance.post('test/subject', {
                 subjectId: params.id
             },
             {
@@ -38,11 +37,7 @@ function TestingAdmin() {
                 }
             }
         )
-        return response
-    };
-
-    const {data, status} = useQuery('Test', fetchTest)
-
+    })
 
 
     const handleOpenCreateQuestionModal = () => setQuestionCreateModal(true);
@@ -50,7 +45,7 @@ function TestingAdmin() {
         event?.preventDefault();
         const formData = new FormData(event.currentTarget);
         try {
-            const res = await axiosInstance.post('test', {
+            await axiosInstance.post('test', {
                     subjectId: parseInt(params.id),
                     question: formData.get('question'),
                     variants: [
@@ -88,7 +83,7 @@ function TestingAdmin() {
         event?.preventDefault();
         const formData = new FormData(event.currentTarget);
         try {
-            const res = await axiosInstance.put('test', {
+            await axiosInstance.put('test', {
                     id: questionEditModal.obj.id,
                     subjectId: params.id,
                     question: formData.get('question'),
@@ -126,7 +121,7 @@ function TestingAdmin() {
 
     const handleDeleteSubjectSubmit = async () => {
         try {
-            const res = await axiosInstance.delete('test?id=' + questionDeleteModal.id, {
+            await axiosInstance.delete('test?id=' + questionDeleteModal.id, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem('user')
                 }
@@ -186,7 +181,7 @@ function TestingAdmin() {
                         // gap: 3
                     }}>
                         {
-                                data.data.length > 0 ? <Box sx={{
+                            data.data.length > 0 ? <Box sx={{
                                     // border: '1px solid #f3f3f3',
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -301,8 +296,10 @@ function TestingAdmin() {
                                                      handleSubmit={handleDeleteSubjectSubmit}/>
                             </>
                         }
-                        <Box sx={{display:'flex',justifyContent:'end'}}>
-                            <Button sx={{marginTop:2,fontWeight:'bold',fontFamily:'Nunito,sans-serif'}} variant={'outlined'} color={'inherit'} onClick={()=>navigate('/subjects')}>Ortga</Button>
+                        <Box sx={{display: 'flex', justifyContent: 'end'}}>
+                            <Button sx={{marginTop: 2, fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}
+                                    variant={'outlined'} color={'inherit'}
+                                    onClick={() => navigate('/subjects')}>Ortga</Button>
                         </Box>
                     </Box>
                 </ResponsiveAppBar>

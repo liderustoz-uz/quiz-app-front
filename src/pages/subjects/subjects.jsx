@@ -17,19 +17,16 @@ function Subjects() {
     const [openDeleteSubjectModal, setOpenDeleteSubjectModal] = useState({open: false, id: null})
     const [openEditSubjectModal, setOpenEditSubjectModal] = useState({open: false, id: null, text: ''})
     const queryClient = useQueryClient()
-    const fetchSubjects = async () => {
-        const res = await axiosInstance.get('subject/list',
+
+    const {data, status} = useQuery('Subjects', async () => {
+        return await axiosInstance.get('subject/list',
             {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem('user')
                 }
             }
         )
-        return res
-    };
-
-    const {data, status} = useQuery('Subjects', fetchSubjects)
-    console.log(data)
+    })
 
     const handleOpenCreateSubjectModal = () => setOpenCreateSubjectModal(true);
     const handleOpenDeleteSubjectModal = (id) => setOpenDeleteSubjectModal({open: true, id: id});
@@ -38,7 +35,7 @@ function Subjects() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         try {
-            const res = await axiosInstance.post('subject', {
+            await axiosInstance.post('subject', {
                     name: data.get('subject'),
                 },
                 {
@@ -46,7 +43,6 @@ function Subjects() {
                         Authorization: "Bearer " + localStorage.getItem('user')
                     }
                 })
-            console.log(res)
             queryClient.invalidateQueries('Subjects')
         } catch (e) {
             console.log(e);
@@ -56,12 +52,11 @@ function Subjects() {
 
     const handleDeleteSubjectSubmit = async () => {
         try {
-            const res = await axiosInstance.delete('subject?id=' + openDeleteSubjectModal.id, {
+            axiosInstance.delete('subject?id=' + openDeleteSubjectModal.id, {
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem('user')
                 }
             })
-            console.log(res)
             queryClient.invalidateQueries('Subjects')
         } catch (e) {
             console.log(e);
@@ -73,7 +68,7 @@ function Subjects() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         try {
-            const res = await axiosInstance.put('subject', {
+            await axiosInstance.put('subject', {
                     id: openEditSubjectModal.id,
                     name: data.get('subject'),
                 },
@@ -82,15 +77,10 @@ function Subjects() {
                         Authorization: "Bearer " + localStorage.getItem('user')
                     }
                 })
-            console.log(res)
             queryClient.invalidateQueries('Subjects')
         } catch (e) {
             console.log(e);
         }
-        console.log({
-            id: openEditSubjectModal.id,
-            name: data.get('subject'),
-        })
         setOpenEditSubjectModal({open: false, id: null, text: ''})
     };
 

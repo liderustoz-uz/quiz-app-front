@@ -7,7 +7,7 @@ import imageAbout from "../../assets/istockphoto-1353786683-612x612.jpg";
 import CardMedia from "@mui/material/CardMedia";
 import {Typography} from "@mui/material";
 
-function About(props) {
+function About() {
     return (
         <>
             <ResponsiveAppBar>
@@ -19,7 +19,7 @@ function About(props) {
                                     component="img"
                                     // height="194"
                                     width="200"
-                                    sx={{width: '500px',borderRadius: '7px'}}
+                                    sx={{width: '500px',borderRadius: '50%'}}
                                     image={imageAbout}
                                     alt="Paella dish"
                                 />

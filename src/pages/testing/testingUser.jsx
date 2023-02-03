@@ -107,7 +107,7 @@ function TestingUser() {
                     }}>
 
                         {
-                            roleUserTests ? <Box sx={{
+                            roleUserTests.length > 0 ? <Box sx={{
                                     // border: '1px solid #f3f3f3',
                                     display: 'flex',
                                     flexDirection: 'column',

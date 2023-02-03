@@ -20,7 +20,6 @@ const style = {
 };
 
 export default function EditQuestionModal({open, setOpen, handleSubmit}) {
-    console.log(open)
     const handleClose = () => setOpen({open:false,obj:null});
 
     return (

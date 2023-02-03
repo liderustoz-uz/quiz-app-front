@@ -20,7 +20,6 @@ const style = {
 };
 
 export default function EditSubjectModal({open, setOpen, handleSubmit}) {
-    console.log(open);
     const handleClose = () => setOpen(false);
 
     return (
