@@ -268,7 +268,8 @@ function TestingAdmin() {
                                                                     backgroundColor: clickedVariants && (index === clickedIndex) ? (variantsBackground ? '#85fc66' : '#ff6161') : 'rgba(86,86,86,0.23)'
                                                                 },
                                                             }} disabled={clickedVariants && (index === clickedIndex.father)}
-                                                                    onClick={() => hundleVariant(variant.isTrue, index, indexIn)}>
+                                                                    // onClick={() => hundleVariant(variant.isTrue, index, indexIn)}
+                                                                >
                                                                 <Typography
                                                                     sx={{textAlign: 'center'}}>{variant.text}</Typography>
                                                                 {localStorage.getItem('role') === 'ROLE_ADMIN' && variant.isTrue &&
