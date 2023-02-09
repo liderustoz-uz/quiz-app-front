@@ -22,7 +22,7 @@ function ActionAreaCard({subject, handleOpenDeleteSubjectModal, handleOpenEditSu
             <CardActionArea>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div" sx={{textAlign: 'center'}}
-                                onClick={localStorage.getItem('role') !== 'ROLE_USER' ? null : () => navigate(`/test/${subject.name}/${subject.id}/admin`)}>
+                                onClick={localStorage.getItem('role') !== 'ROLE_USER' ? () => navigate(`/test/${subject.name}/${subject.id}/admin`) : null}>
                         {subject.name}
                     </Typography>
                     {
