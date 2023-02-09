@@ -2,7 +2,7 @@ import React, {memo, useState} from 'react';
 import {axiosInstance} from "../../config";
 import {useQuery, useQueryClient} from "react-query";
 import {useNavigate, useParams} from "react-router-dom";
-import {Typography} from "@mui/material";
+import {Pagination, Typography} from "@mui/material";
 import ResponsiveAppBar from "../../components/header/header";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -16,28 +16,44 @@ import DeleteQuestionModal from "../../components/deleteQuestionModal/deleteQues
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import Footer from "../../components/footer/footer";
 
+const fetchData = async (page = 0, id) => {
+    console.log({
+        subjectId: id,
+        pageRequest: {
+            page: page,
+            perPage: 20
+        }
+    })
+    return await axiosInstance.post('test/subject', {
+            subjectId: id,
+            pageRequest: {
+                page: page,
+                perPage: 20
+            }
+        },
+        {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem('user')
+            }
+        }
+    )
+}
+
 function TestingAdmin() {
     const navigate = useNavigate()
     const params = useParams()
     const queryClient = useQueryClient()
     const [questionCreateModal, setQuestionCreateModal] = useState(false)
+    const [page, setPage] = useState(0)
     const [questionEditModal, setQuestionEditModal] = useState({open: false, obj: null})
     const [questionDeleteModal, setQuestionDeleteModal] = useState({open: false, id: null})
     const [variantsBackground, setVariantsBackground] = useState(false)
     const [clickedVariants, setClickedVariants] = useState(false)
     const [clickedIndex, setClickedIndex] = useState({father: null, children: null})
 
-    const {data, status} = useQuery('Test', async () => {
-        return await axiosInstance.post('test/subject', {
-                subjectId: params.id
-            },
-            {
-                headers: {
-                    Authorization: "Bearer " + localStorage.getItem('user')
-                }
-            }
-        )
-    })
+    const {data, status} = useQuery(['Test', page], () => fetchData(page, params.id))
+
+    console.log(data)
 
 
     const handleOpenCreateQuestionModal = () => setQuestionCreateModal(true);
@@ -72,7 +88,7 @@ function TestingAdmin() {
                         Authorization: "Bearer " + localStorage.getItem('user')
                     }
                 })
-            queryClient.invalidateQueries('Test')
+            queryClient.invalidateQueries(['Test', page])
         } catch (e) {
             console.log(e);
         }
@@ -111,7 +127,7 @@ function TestingAdmin() {
                         Authorization: "Bearer " + localStorage.getItem('user')
                     }
                 })
-            queryClient.invalidateQueries('Test')
+            queryClient.invalidateQueries(['Test', page])
         } catch (e) {
             console.log(e);
         }
@@ -126,7 +142,7 @@ function TestingAdmin() {
                     Authorization: "Bearer " + localStorage.getItem('user')
                 }
             })
-            queryClient.invalidateQueries('Test')
+            queryClient.invalidateQueries(['Test', page])
         } catch (e) {
             console.log(e);
         }
@@ -137,6 +153,11 @@ function TestingAdmin() {
         setVariantsBackground(boolen)
         setClickedVariants(true)
         setClickedIndex({father: index, children: indexIn})
+    }
+
+    const pagination = (e) => {
+        console.log(parseInt(e.target.ariaLabel[e.target.ariaLabel.length - 1]) - 1)
+        setPage(parseInt(e.target.ariaLabel[e.target.ariaLabel.length - 1]) - 1)
     }
 
     if (status === 'loading') {
@@ -181,7 +202,7 @@ function TestingAdmin() {
                         // gap: 3
                     }}>
                         {
-                            data.data.length > 0 ? <Box sx={{
+                            data.data.content.length > 0 ? <Box sx={{
                                     // border: '1px solid #f3f3f3',
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -192,7 +213,7 @@ function TestingAdmin() {
                                     marginBottom: '20px'
                                 }}>
                                     {
-                                        data.data.map((item, index) => (
+                                        data.data.content.map((item, index) => (
                                             <Box key={item.id}
                                                  sx={{border: '1px solid grey', borderRadius: 2, padding: 1}}>
                                                 <Box sx={{
@@ -300,6 +321,10 @@ function TestingAdmin() {
                             <Button sx={{marginTop: 2, fontWeight: 'bold', fontFamily: 'Nunito,sans-serif'}}
                                     variant={'outlined'} color={'inherit'}
                                     onClick={() => navigate('/subjects')}>Ortga</Button>
+                        </Box>
+                        <Box sx={{display: 'flex', justifyContent: 'center', marginY: 2}}>
+                            <Pagination count={10}
+                                        onClick={(e) => pagination(e)} page={page + 1}/>
                         </Box>
                     </Box>
                 </ResponsiveAppBar>
