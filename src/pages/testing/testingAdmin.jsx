@@ -324,7 +324,7 @@ function TestingAdmin() {
                                     onClick={() => navigate('/subjects')}>Ortga</Button>
                         </Box>
                         <Box sx={{display: 'flex', justifyContent: 'center', marginY: 2}}>
-                            <Pagination count={10}
+                            <Pagination count={Math.ceil((data.data.totalElements)/20)}
                                         onClick={(e) => pagination(e)} page={page + 1}/>
                         </Box>
                     </Box>
