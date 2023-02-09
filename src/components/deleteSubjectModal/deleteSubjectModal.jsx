@@ -36,13 +36,14 @@ export default function DeleteSubjectModal({open, setOpen, handleSubmit}) {
             >
                 <Fade in={open.open}>
                     <Box sx={style}>
-                        <Box noValidate
+                        <Box noValidate component="form"
+                             onSubmit={handleSubmit}
                              sx={{mt: 1}}>
                             <Typography variant={"h5"} sx={{textAlign: 'center'}}>Fan o'chirish</Typography>
                             <Button
-                                // type="submit"
+                                type="submit"
                                 fullWidth
-                                onClick={() => handleSubmit(open.id)}
+                                // onClick={() => handleSubmit(open.id)}
                                 variant="contained"
                                 sx={{mt: 3, mb: 2}}
                             >

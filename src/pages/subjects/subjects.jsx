@@ -50,7 +50,8 @@ function Subjects() {
         setOpenCreateSubjectModal(false)
     };
 
-    const handleDeleteSubjectSubmit = async () => {
+    const handleDeleteSubjectSubmit = async (event) => {
+        event.preventDefault();
         try {
             axiosInstance.delete('subject?id=' + openDeleteSubjectModal.id, {
                 headers: {

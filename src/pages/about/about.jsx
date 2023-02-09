@@ -1,11 +1,11 @@
 import React, {memo} from 'react';
 import ResponsiveAppBar from "../../components/header/header";
-import Footer from "../../components/footer/footer";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import imageAbout from "../../assets/istockphoto-1353786683-612x612.jpg";
-import CardMedia from "@mui/material/CardMedia";
+import Grid from "@mui/material/Grid";
 import {Typography} from "@mui/material";
+import imageAbout from "../../assets/istockphoto-1353786683-612x612.jpg";
+import Footer from "../../components/footer/footer";
+import CardMedia from "@mui/material/CardMedia";
 
 function About() {
     return (
