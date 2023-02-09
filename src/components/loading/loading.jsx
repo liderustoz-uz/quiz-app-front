@@ -6,7 +6,7 @@ import {memo} from "react";
 function Loading() {
     return (
         <Box sx={{ display: 'flex' }}>
-            <CircularProgress />
+            <CircularProgress color={'inherit'} />
         </Box>
     );
 }
