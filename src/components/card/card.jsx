@@ -18,11 +18,11 @@ function ActionAreaCard({subject, handleOpenDeleteSubjectModal, handleOpenEditSu
             transition: 'all .3s',
             backgroundColor: '#f2f2f2'
         }}
-              onClick={localStorage.getItem('role') === 'ROLE_USER' ? () => navigate(`/test/${subject.name}/${subject.id}/user`) : () => navigate(`/test/${subject.name}/${subject.id}/admin`)}>
+              onClick={localStorage.getItem('role') === 'ROLE_USER' ? () => navigate(`/test/${subject.name}/${subject.id}/user`) : null}>
             <CardActionArea>
                 <CardContent>
                     <Typography gutterBottom variant="h5" component="div" sx={{textAlign: 'center'}}
-                                onClick={localStorage.getItem('role') !== 'ROLE_USER' ? () => navigate(`/test/${subject.name}/${subject.id}`) : null}>
+                                onClick={localStorage.getItem('role') !== 'ROLE_USER' ? null : () => navigate(`/test/${subject.name}/${subject.id}/admin`)}>
                         {subject.name}
                     </Typography>
                     {
