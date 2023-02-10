@@ -68,7 +68,7 @@ const SignUp = () => {
             setFirstNameError(false)
             if (data.get('lastName').trim().length > 0) {
                 setLastNameError(false)
-                if (data.get('userName').trim().length >= 4 && data.get('userName').trim().length <= 10) {
+                if (data.get('userName').trim().length >= 4 && data.get('userName').trim().length <= 20) {
                     setUserNameError(false)
                     if (password(data.get('password')) && data.get('password').length > 8) {
                         setPasswordError(false);
@@ -151,7 +151,7 @@ const SignUp = () => {
                                 required
                                 fullWidth
                                 error={userNameError}
-                                helperText={userNameError&&'Tahallus 4 dan ko\'p 10 dan kam bo\'lishi kerak'}
+                                helperText={userNameError&&'Tahallus 4 dan ko\'p 20 dan kam bo\'lishi kerak'}
                                 name="userName"
                                 label="Foydalanuvchi nomi"
                                 type="text"
