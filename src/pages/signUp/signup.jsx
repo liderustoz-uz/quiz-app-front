@@ -81,6 +81,8 @@ const SignUp = () => {
                             })
                             navigate("/subjects")
                             localStorage.setItem('user', res.data.token)
+                            localStorage.setItem('role', res.data.user.role)
+                            console.log(res)
                         } catch (e) {
                             console.log(e);
                         }
