@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.06edc622.css",
+    "main.js": "/static/js/main.348cda88.js",
+    "static/js/787.f07c9343.chunk.js": "/static/js/787.f07c9343.chunk.js",
+    "static/media/121-1213245_how-to-set-use-man-reading-books-svg.png": "/static/media/121-1213245_how-to-set-use-man-reading-books-svg.b8e6a8228042f31f63df.png",
+    "static/media/istockphoto-1353786683-612x612.jpg": "/static/media/istockphoto-1353786683-612x612.314d739af0c998f03cd9.jpg",
+    "index.html": "/index.html",
+    "main.06edc622.css.map": "/static/css/main.06edc622.css.map",
+    "main.348cda88.js.map": "/static/js/main.348cda88.js.map",
+    "787.f07c9343.chunk.js.map": "/static/js/787.f07c9343.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.06edc622.css",
+    "static/js/main.348cda88.js"
+  ]
+}
