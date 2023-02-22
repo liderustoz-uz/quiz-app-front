@@ -17,7 +17,7 @@ const theme = createTheme();
 
 const Login = () => {
     const navigate = useNavigate()
-    const [alert, setAlert] = useState({open: false, text: "", status: ""});
+
 
 
     const handleSubmit = async (event) => {
@@ -34,7 +34,6 @@ const Login = () => {
             localStorage.setItem('role', res.data.user.role)
         } catch (e) {
             console.log(e);
-            e.message === 'username_already_taken' && AlertFunction(setAlert, "warning", "Bu foydalanuvchi nomi allaqachon olingan")
         }
     };
 
@@ -108,7 +107,7 @@ const Login = () => {
                     </Box>
                 </Grid>
             </Grid>
-            <AlertContent alert={alert}/>
+
         </ThemeProvider>
     );
 }

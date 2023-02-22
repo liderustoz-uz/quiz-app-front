@@ -10,6 +10,7 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {useNavigate} from 'react-router-dom';
 import {memo, useState} from 'react';
 import {axiosInstance} from "../../config";
+import AlertContent, {AlertFunction} from "../../components/alert/alert";
 
 
 const theme = createTheme();
@@ -20,6 +21,7 @@ const SignUp = () => {
     const [lastNameError, setLastNameError] = useState(false);
     const [userNameError, setUserNameError] = useState(false);
     const [passwordError, setPasswordError] = useState(false);
+    const [alert, setAlert] = useState({open: false, text: "", status: ""});
 
     const symbolsUp = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
     const symbolsLow = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
@@ -84,6 +86,7 @@ const SignUp = () => {
                             localStorage.setItem('role', res.data.user.role)
                         } catch (e) {
                             console.log(e);
+                            e.status === 200 && AlertFunction(setAlert, "warning", "Bu foydalanuvchi nomi allaqachon olingan")
                         }
                     } else {
                         setPasswordError(true);
@@ -202,6 +205,7 @@ const SignUp = () => {
                     </Box>
                 </Grid>
             </Grid>
+            <AlertContent alert={alert}/>
         </ThemeProvider>
     );
 }
