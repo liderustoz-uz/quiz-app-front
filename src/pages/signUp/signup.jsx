@@ -86,7 +86,7 @@ const SignUp = () => {
                             localStorage.setItem('role', res.data.user.role)
                         } catch (e) {
                             console.log(e);
-                            e.response.status === 200 && AlertFunction(setAlert, "warning", "Bu foydalanuvchi nomi allaqachon olingan")
+                            e.response.status === 400 && AlertFunction(setAlert, "warning", "Bu foydalanuvchi nomi allaqachon olingan")
                         }
                     } else {
                         setPasswordError(true);
